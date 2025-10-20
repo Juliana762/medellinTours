@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo de Medellín</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #map-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        #map {
+            flex: 1;
+            width: 100%;
+        }
+        #controls {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .info-window {
+            max-width: 250px;
+        }
+        .info-window h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <div id="header">
+            <h1>Mapa Interactivo de Medellín</h1>
+            <p>Para sesión de usuarios - Haz clic en los marcadores para más información</p>
+        </div>
+        <div id="map"></div>
+        <div id="controls">
+            <button id="reset-view">Vista Inicial</button>
+            <button id="show-all">Mostrar Todos los Marcadores</button>
+            <button id="add-marker">Añadir Marcador Personalizado</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Inicializar el mapa centrado en Medellín
+        const map = L.map('map').setView([6.2442, -75.5812], 12);
+
+        // Añadir capa de tiles de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Marcadores de lugares importantes en Medellín
+        const locations = [
+            {
+                name: "Parque Explora",
+                coords: [6.2709, -75.5674],
+                description: "Museo interactivo de ciencia y tecnología con acuario."
+            },
+            {
+                name: "Jardín Botánico",
+                coords: [6.2701, -75.5634],
+                description: "Espacio verde con amplia variedad de plantas y orquídeas."
+            },
+            {
+                name: "Plaza Botero",
+                coords: [6.2518, -75.5726],
+                description: "Plaza con 23 esculturas del artista Fernando Botero."
+            },
+            {
+                name: "Museo de Antioquia",
+                coords: [6.2515, -75.5723],
+                description: "Museo que alberga obras de arte colombiano e internacional."
+            },
+            {
+                name: "Pueblito Paisa",
+                coords: [6.2389, -75.5764],
+                description: "Réplica de un pueblo típico antioqueño en el Cerro Nutibara."
+            },
+            {
+                name: "Metro de Medellín",
+                coords: [6.2456, -75.5740],
+                description: "Sistema de transporte masivo de la ciudad."
+            },
+            {
+                name: "Parque Arví",
+                coords: [6.2936, -75.5008],
+                description: "Parque ecoturístico en las montañas de Medellín."
+            }
+        ];
+
+        // Añadir marcadores al mapa
+        const markers = [];
+        locations.forEach(location => {
+            const marker = L.marker(location.coords).addTo(map);
+            marker.bindPopup(`
+                <div class="info-window">
+                    <h3>${location.name}</h3>
+                    <p>${location.description}</p>
+                </div>
+            `);
+            markers.push(marker);
+        });
+
+        // Funcionalidad de los controles
+        document.getElementById('reset-view').addEventListener('click', function() {
+            map.setView([6.2442, -75.5812], 12);
+        });
+
+        document.getElementById('show-all').addEventListener('click', function() {
+            const group = new L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.1));
+        });
+
+        document.getElementById('add-marker').addEventListener('click', function() {
+            const name = prompt("Nombre del lugar:");
+            if (name) {
+                const description = prompt("Descripción:");
+                const marker = L.marker(map.getCenter()).addTo(map);
+                marker.bindPopup(`
+                    <div class="info-window">
+                        <h3>${name}</h3>
+                        <p>${description || "Sin descripción"}</p>
+                    </div>
+                `);
+                markers.push(marker);
+                marker.openPopup();
+            }
+        });
+
+        // Ajustar el tamaño del mapa cuando la ventana cambie de tamaño
+        window.addEventListener('resize', function() {
+            map.invalidateSize();
+        });
+    </script>
+</body>
+</html>

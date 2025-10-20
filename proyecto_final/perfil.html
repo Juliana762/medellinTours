@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Medellín Tours | Perfil de Viajero</title>
+    <link rel="icon" href="img/logo2.png " type="image/x-icon">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Buscar destinos, viajeros...">
+        </div>
+        <div class="nav-icons">
+            <div class="icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <a href="mapausuario.html">
+                <div class="icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+            </a>
+            <div class="icon">
+                <i class="fas fa-route"></i>
+            </div>
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="icon">
+                <i class="fas fa-compass"></i>
+            </div>
+        </div>
+        <div class="nav-icons">
+            <div class="icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="icon">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Perfil" class="profile-pic" onclick="openModal()">
+        </div>
+    </nav>
+    
+    <div class="container">
+        <aside class="left-sidebar">
+            <div class="sidebar-card">
+                <div class="intro-item">
+                    <i class="fas fa-passport intro-icon"></i>
+                    <span>Mariana Lopéz</span>
+                </div>
+                <div class="intro-item">
+                    <i class="fas fa-map-pin intro-icon"></i>
+                    <span>De: Medellín, Antioquia</span>
+                </div>
+                <div class="intro-item">
+                    <i class="fas fa-suitcase-rolling intro-icon"></i>
+                    <span>Viajera </span>
+                </div>
+                <div class="intro-item">
+                    <i class="fas fa-globe-europe intro-icon"></i>
+                    <span>32 destinos visitados</span>
+                </div>
+                <div class="intro-item">
+                    <i class="fas fa-calendar-alt intro-icon"></i>
+                    <span>Viajando desde 2015</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3 class="card-title">Mis álbumes</h3>
+                <div class="photo-grid">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=300&fit=crop" alt="Comuna 13" class="photo-item">
+                        <p>Comuna 13</p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=300&h=300&fit=crop" alt="Plaza Botero" class="photo-item">
+                        <p>Plaza Botero</p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=300&h=300&fit=crop" alt="Pueblito Paisa" class="photo-item">
+                        <p>Pueblito Paisa</p>
+                    </div>
+                </div>
+                <a href="albumes.html" class="see-all">Ver todos los álbumes</a>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3 class="card-title">Viajeros similares</h3>
+                <div>
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Viajera" class="photo-item">
+                    <p>Ana Martínez</p>
+                    <p class="mutual-friends">4 destinos en común</p>
+                </div>
+                <div>
+                    <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Viajero" class="photo-item">
+                    <p>Carlos Fernández</p>
+                    <p class="mutual-friends">5 destinos en común</p>
+                </div>
+                <span class="see-all">Ver más viajeros</span>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="profile-header">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1200&h=350&fit=crop" alt="Portada" class="cover-photo" id="coverPhoto">
+                <div class="profile-info">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto de perfil" class="profile-pic-large" id="profilePicLarge" onclick="openModal()">
+                    <h1 class="profile-name" id="profileName">Mariana Lopéz</h1>
+                    <p class="profile-bio" id="profileBio">Bloguera de viajes | Fotógrafa | Turista apasionada | Compartiendo las mejores experiencias y consejos para turistas futuros.</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">328</span>
+                            <span class="stat-label">Reseñas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">32</span>
+                            <span class="stat-label">Destinos visitados</span>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+            
+            <div class="profile-nav">
+                <div class="nav-item active">Reseñas</div>
+                <div class="nav-item">Destinos</div>
+                <div class="nav-item">Itinerarios</div>
+                <div class="nav-item">Fotos</div>
+                <div class="nav-item">Favoritos</div>
+            </div>
+            
+            <div class="post-container">
+                <div class="post-header">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Usuario" class="post-user-pic">
+                    <div class="post-user-info">
+                        <div class="post-user-name">María González</div>
+                        <div class="post-time">Ayer · <i class="fas fa-map-marker-alt"></i> Comuna 13, Medellín· <i class="fas fa-globe-americas"></i></div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    <h3>Grafi-Tour - Una experiencia increíble</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.5/5</span>
+                    </div>
+                    <p>La Comuna 13, otrora un símbolo de violencia, es hoy un testimonio vibrante de resiliencia y arte urbano. Sus calles, adornadas con impresionantes grafitis que narran historias de superación, son una galería al aire libre. El tour con guías locales (excelentes narradores) me mostró cómo el arte y los escaleras eléctricas cambiaron la vida de esta comunidad.</p>
+                    <p><strong>Consejo:</strong> Lleva calzado cómodo y agua.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop" alt="Comuna 13" class="post-image">
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i class="far fa-thumbs-up"></i> Útil (124)
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-bookmark"></i> Guardar
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-container">
+                <div class="post-header">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Usuario" class="post-user-pic">
+                    <div class="post-user-info">
+                        <div class="post-user-name">María González</div>
+                        <div class="post-time">3 días atrás · <i class="fas fa-map-marker-alt"></i> Santorini, Grecia · <i class="fas fa-user-friends"></i></div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    <h3>Guía completa para visitar Santorini con presupuesto</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>4/5 (valoración general de la isla)</span>
+                    </div>
+                    <p><strong>Mejor época:</strong> Mayo-Junio o Septiembre-Octubre (evitar julio-agosto por precios y multitudes)</p>
+                    <p><strong>Alojamiento económico:</strong> Buscar en pueblos como Pyrgos o Kamari en lugar de Oia</p>
+                    <p><strong>Transporte:</strong> Autobús local es eficiente y barato (€1.80 por trayecto)</p>
+                    <p><strong>Comida:</strong> Evitar restaurantes con vista al calderón, mejor pequeños tavernas griegas</p>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i class="far fa-thumbs-up"></i> Útil (89)
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-comment"></i> Comentarios (17)
+                    </div>
+                    <div class="post-action">
+                        <i class="fas fa-share"></i> Compartir
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-bookmark"></i> Guardar
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-container">
+                <div class="post-header">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Usuario" class="post-user-pic">
+                    <div class="post-user-info">
+                        <div class="post-user-name">María González</div>
+                        <div class="post-time">1 semana atrás · <i class="fas fa-map-marker-alt"></i> Patagonia, Argentina · <i class="fas fa-globe-americas"></i></div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    <h3>Trekking en el Glaciar Perito Moreno - Lo que debes saber</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>5/5 - Experiencia única</span>
+                    </div>
+                    <p>El mini-trekking sobre el glaciar fue una de las experiencias más increíbles de mi vida. La excursión incluye:</p>
+                    <ul>
+                        <li>Traslado desde El Calafate</li>
+                        <li>Barco cruzando el Lago Argentino</li>
+                        <li>Equipamiento completo (crampones, guantes)</li>
+                        <li>Guías expertos y muy profesionales</li>
+                        <li>Whisky con hielo del glaciar al final</li>
+                    </ul>
+                    <p><strong>Requisitos:</strong> Estado físico moderado. No recomendado para personas con movilidad reducida.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1582972236019-ea9eaf0b7b81?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=400&q=80" alt="Glaciar Perito Moreno" class="post-image">
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i class="far fa-thumbs-up"></i> Útil (156)
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-bookmark"></i> Guardar
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="right-sidebar">
+            <div class="sidebar-card">
+                <h3 class="card-title">Próximos Destinos</h3>
+                <div class="intro-item">
+                    <i class="fas fa-plane-departure intro-icon"></i>
+                    <span><strong>Hotel Nutibara</strong> - Noviembre 2025 (en 2 meses)</span>
+                </div>
+                <div class="intro-item">
+                    <i class="fas fa-plane-departure intro-icon"></i>
+                    <span><strong>San Diego</strong> - Diciembre 2025</span>
+                </div>
+                <span class="see-all">Ver itinerario completo</span>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3 class="card-title">Top 5 destinos</h3>
+                <ol>
+                    <li>Comuna 13</li>
+                    <li>Plaza Botero</li>
+                    <li>Pueblito paisa</li>
+                    <li>Parque lleras</li>
+                </ol>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3 class="card-title">Destinos recomendados</h3>
+                <div class="intro-item">
+                    <img src="https://picsum.photos/50/50?random=21" alt="Blog" class="photo-item" style="width: 36px; height: 36px; margin-right: 12px;">
+                    <span>Viajando Sin Pausa</span>
+                </div>
+                <div class="intro-item">
+                    <img src="https://picsum.photos/50/50?random=22" alt="Blog" class="photo-item" style="width: 36px; height: 36px; margin-right: 12px;">
+                    <span>Nomad Digital</span>
+                </div>
+                <div class="intro-item">
+                    <img src="https://picsum.photos/50/50?random=23" alt="Blog" class="photo-item" style="width: 36px; height: 36px; margin-right: 12px;">
+                    <span>Fotografía Viajera</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modal para editar perfil -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-user-edit"></i>
+                    Editar Perfil
+                </h2>
+                <button class="close-modal" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Sección para cambiar foto de perfil -->
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-user-circle"></i>
+                    Foto de Perfil
+                </label>
+                <div class="photo-upload-section">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Vista previa" class="photo-preview" id="profilePreview">
+                    <button class="upload-btn" onclick="document.getElementById('profileImageInput').click()">
+                        <i class="fas fa-camera"></i>
+                        Cambiar foto
+                    </button>
+                    <input type="file" id="profileImageInput" accept="image/*" onchange="previewProfileImage(this)">
+                </div>
+            </div>
+
+            <!-- Sección para cambiar imagen de fondo -->
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-image"></i>
+                    Imagen de Fondo
+                </label>
+                <div class="photo-upload-section">
+                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1200&h=350&fit=crop" alt="Vista previa del fondo" class="cover-preview" id="coverPreview">
+                    <button class="upload-btn" onclick="document.getElementById('coverImageInput').click()">
+                        <i class="fas fa-mountain"></i>
+                        Cambiar fondo
+                    </button>
+                    <input type="file" id="coverImageInput" accept="image/*" onchange="previewCoverImage(this)">
+                </div>
+            </div>
+
+            <!-- Campo para editar descripción -->
+            <div class="form-group">
+                <label class="form-label" for="bioTextarea">
+                    <i class="fas fa-quote-right"></i>
+                    Descripción
+                </label>
+                <textarea 
+                    id="bioTextarea" 
+                    class="form-input form-textarea" 
+                    placeholder="Cuéntanos sobre ti, tus pasiones de viaje y experiencias..."
+                >Bloguera de viajes | Fotógrafa | Turista apasionada | Compartiendo las mejores experiencias y consejos para turistas futuros.</textarea>
+            </div>
+
+            <!-- Acciones del modal -->
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                    Cancelar
+                </button>
+                <button class="btn-save" onclick="saveProfile()">
+                    <i class="fas fa-save"></i>
+                    Guardar Cambios
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para abrir el modal
+        function openModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Evitar scroll en el fondo
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        document.getElementById('profileModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Función para previsualizar imagen de perfil
+        function previewProfileImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePreview').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Función para previsualizar imagen de fondo
+        function previewCoverImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('coverPreview').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Función para guardar los cambios del perfil
+        function saveProfile() {
+            // Obtener los valores actuales
+            const newProfileImage = document.getElementById('profilePreview').src;
+            const newCoverImage = document.getElementById('coverPreview').src;
+            const newBio = document.getElementById('bioTextarea').value;
+
+            // Actualizar la imagen de perfil principal
+            document.getElementById('profilePicLarge').src = newProfileImage;
+            
+            // Actualizar todas las imágenes de perfil en la navbar
+            const navbarProfilePic = document.querySelector('.navbar .profile-pic');
+            if (navbarProfilePic) {
+                navbarProfilePic.src = newProfileImage;
+            }
+
+            // Actualizar todas las imágenes de perfil en los posts
+            const postProfilePics = document.querySelectorAll('.post-user-pic');
+            postProfilePics.forEach(pic => {
+                pic.src = newProfileImage;
+            });
+
+            // Actualizar imagen de fondo
+            document.getElementById('coverPhoto').src = newCoverImage;
+
+            // Actualizar biografía
+            document.getElementById('profileBio').textContent = newBio;
+
+            // Mostrar mensaje de confirmación (opcional)
+            showSuccessMessage();
+
+            // Cerrar modal
+            closeModal();
+        }
+
+        // Función para mostrar mensaje de éxito
+        function showSuccessMessage() {
+            // Crear elemento de notificación
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(53, 168, 0, 0.3);
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 600;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                ¡Perfil actualizado correctamente!
+            `;
+
+            document.body.appendChild(notification);
+
+            // Remover la notificación después de 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Agregar animaciones CSS para las notificaciones
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

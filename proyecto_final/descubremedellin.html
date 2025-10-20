@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="img/logo2.png" type="image/x-icon">
+    <title>Descubre medellín</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; }
+        .popup-image { max-width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Medellín en el mapa</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Inicializar mapa centrado en Medellín
+        var map = L.map('map').setView([6.2442, -75.5812], 13);
+
+        // Añadir capa de tiles (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Lugares de interés
+        var lugares = [
+            {
+                nombre: "Jardín Botánico",
+                ubicacion: [6.2709, -75.5723],
+                foto: "https://example.com/jardin.jpg",
+                descripcion: "Jardín con más de 1,000 especies de plantas y mariposario."
+            },
+            {
+                nombre: "Metrocable",
+                ubicacion: [6.2596, -75.5904],
+                foto: "https://example.com/metrocable.jpg",
+                descripcion: "Sistema de teleférico integrado al transporte público."
+            }
+            // Agregar más lugares aquí
+        ];
+
+        // Añadir marcadores
+        lugares.forEach(function(lugar) {
+            L.marker(lugar.ubicacion).addTo(map)
+                .bindPopup(`
+                    <h3>${lugar.nombre}</h3>
+                    <img class="popup-image" src="${lugar.foto}" alt="${lugar.nombre}">
+                    <p>${lugar.descripcion}</p>
+                `);
+        });
+
+        
+    </script>
+
+   <style>
+    /* --- Reset y Estilos Base --- */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        background-color: #f4f4f9;
+        color: #333;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2.5rem;
+        margin: 30px 0;
+    }
+
+    /* --- Contenedor del Mapa --- */
+    #map {
+        height: 600px;
+        width: 90%;
+        max-width: 1100px;
+        margin: 0 auto 50px auto;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        transition: filter 0.3s ease;
+    }
+
+    /* --- Estilos para los Popups de Leaflet --- */
+    .leaflet-popup-content-wrapper {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+    }
+
+    .leaflet-popup-content h3 {
+        margin: 0 0 8px;
+        color: #0078d4;
+        font-size: 1.2rem;
+    }
+
+    .leaflet-popup-content p {
+        margin: 5px 0 0;
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+    .popup-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+:root {
+    --green: #32cd32; /* verde lima */
+    --yellow: #f1c40f; /* amarillo brillante */
+    --transition: all 0.3s ease;
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.2);
+}
+
+/* Botón en modo claro (día) */
+.theme-toggle {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 1003;
+    background: #1e3a32;
+    color: var(--yellow);
+    border: 2px solid rgba(163, 159, 159, 0.521);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.4rem;
+    transition: var(--transition);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* === MODO OSCURO ESTILOS === */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+    position: relative;
+}
+
+/* Oscurecer la imagen de fondo en modo oscuro con pseudo elemento */
+body.dark-mode::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35); /* capa negra semi-transparente */
+    pointer-events: none;
+    z-index: 1000;
+}
+
+body.dark-mode h1 {
+    color: #e0e0e0;
+}
+
+body.dark-mode #map {
+    filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
+    transition: filter 0.3s ease;
+}
+
+/* Ajusta popups */
+body.dark-mode .leaflet-popup-content-wrapper {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+body.dark-mode .leaflet-popup-content h3 {
+    color: #58a6ff;
+}
+
+body.dark-mode .leaflet-popup-content p {
+    color: #c9d1d9;
+}
+
+/* Botón en modo oscuro (verde) */
+body.dark-mode .theme-toggle {
+    background: #2d2d2d;
+    color: var(--green);
+    border-color: rgba(50, 205, 50, 0.7);
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .theme-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    #map {
+        height: 400px;
+    }
+}
+
+
+  body {
+    background-image: url('img/ultimointento.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+  }
+</style>
+
+</body>
+</html>

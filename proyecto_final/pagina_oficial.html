@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/logo2.png" type="image/x-icon">
+    <title>Medellín Tours</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS - Modo Claro */
+        :root {
+            --primary: #1e3a32;
+            --primary-light: #2d5246;
+            --secondary: #c9a876;
+            --accent: #e8d5b5;
+            --dark: #0f1c19;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gray-100: #f1f3f4;
+            --gray-200: #e8eaed;
+            --gray-300: #dadce0;
+            --gray-700: #5f6368;
+            --gray-900: #202124;
+            --success: #137333;
+            --warning: #f29900;
+            --danger: #d93025;
+            --nature-green: #4a7c59;
+            --mountain-blue: #2c5aa0;
+            --tropical-orange: #ff7f50;
+            
+            --bg-primary: var(--white);
+            --bg-secondary: rgba(241, 243, 244, 0.8);
+            --text-primary: var(--gray-900);
+            --text-secondary: var(--gray-700);
+            --border-color: var(--gray-200);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --header-bg-scrolled: rgba(255, 255, 255, 0.98);
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.15);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --header-height: 100px;
+        }
+
+        /* Variables CSS - Modo Oscuro */
+        [data-theme="dark"] {
+            --primary: #4a9d7f;
+            --primary-light: #5db491;
+            --secondary: #e5c188;
+            --accent: #f2e5c7;
+            --nature-green: #6ba877;
+            --mountain-blue: #4a7bc8;
+            --tropical-orange: #ff9a7a;
+            
+            --bg-primary: #0d1117;
+            --bg-secondary: rgba(30, 30, 30, 0.9);
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --border-color: #2a2a2a;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --header-bg: rgba(13, 17, 23, 0.95);
+            --header-bg-scrolled: rgba(13, 17, 23, 0.98);
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.5);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            scroll-padding-top: var(--header-height);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: var(--transition);
+            padding-top: var(--header-height);
+        }
+
+        .container {
+            max-width: 1410px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-light);
+            transform: scale(1.1);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo {
+            width: 950px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: var(--transition);
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 85px;
+            width: 85px;
+            border-radius: 50%;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+            background-color: var(--bg-secondary);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .profile-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-btn:hover {
+            background: var(--primary-light);
+            transform: scale(1.1);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 3px 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        /* Hero Dashboard */
+        .hero-dashboard {
+            background: linear-gradient(135deg, var(--primary), var(--nature-green));
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-dashboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-dashboard h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-dashboard p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Quick Stats */
+        .stats-section {
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--secondary), var(--tropical-orange));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Services Grid */
+        .services-section {
+            padding: 4rem 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .service-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--nature-green), var(--mountain-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .service-features li i {
+            color: var(--success);
+            width: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--nature-green));
+            color: var(--white);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Alert Section */
+        .alerts-section {
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .alert {
+            background: var(--card-bg);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .alert.danger {
+            border-left-color: var(--danger);
+        }
+
+        .alert.success {
+            border-left-color: var(--success);
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+            color: var(--warning);
+        }
+
+        .alert.danger .alert-icon {
+            color: var(--danger);
+        }
+
+        .alert.success .alert-icon {
+            color: var(--success);
+        }
+
+        .alert-content h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .alert-content p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Featured Places */
+        .places-section {
+            padding: 4rem 0;
+        }
+
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .place-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .place-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .place-image {
+            height: 180px;
+            background: linear-gradient(45deg, var(--secondary), var(--tropical-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+
+        .place-content {
+            padding: 1.5rem;
+        }
+
+        .place-title {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .place-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #ffc107;
+        }
+
+        .rating-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: -768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--header-bg);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                transition: var(--transition);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .services-grid,
+            .places-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-dashboard h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" title="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <img src="img/logo2.png" alt="Medellin Tours" class="logo-img">
+                    <span class="logo-text">Medellín Tours</span>
+                </div>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#servicios" class="nav-link active">Servicios</a></li>
+                    <li><a href="#lugares" class="nav-link">Lugares</a></li>
+                    <li><a href="#rutas" class="nav-link">Rutas</a></li>
+                    <li><a href="#alertas" class="nav-link">Alertas</a></li>
+                    <li><a href="#restaurantes" class="nav-link">Gastronomía</a></li>
+                    <div class="user-profile">
+                        <!--Perfil-->
+                        <button class="profile-btn" title="Mi Perfil" type="button"
+        onclick="window.location.href = 'perfil.html';">
+    <i class="fas fa-user"></i>
+</button>
+
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Dashboard -->
+    <section class="hero-dashboard">
+        <div class="container">
+            <h1>¡Bienvenido a Medellín Tours!</h1>
+            <p>Descubre la ciudad de la eterna primavera con nuestros servicios personalizados. Tu aventura comienza aquí.</p>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Medellín en Números</h2>
+                <p>Datos actualizados sobre nuestra hermosa ciudad</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="stat-number">150+</div>
+                    <div>Lugares Turísticos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-number">300+</div>
+                    <div>Restaurantes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <div class="stat-number">25+</div>
+                    <div>Rutas Disponibles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number">5000+</div>
+                    <div>Usuarios Activos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros Servicios</h2>
+                <p>Experimenta Medellín como nunca antes con nuestros servicios especializados</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Tours Guiados</h3>
+                        <p class="service-description">Explora Medellín con guías locales expertos que conocen cada rincón de la ciudad.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Guías certificados</li>
+                            <li><i class="fas fa-check"></i> Grupos pequeños</li>
+                            <li><i class="fas fa-check"></i> Rutas personalizadas</li>
+                            <li><i class="fas fa-check"></i> Transporte incluido</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Ver Tours</a>
+                        <a href="#" class="btn btn-outline">Más Info</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Rutas Personalizadas</h3>
+                        <p class="service-description">Crea tu propio itinerario basado en tus intereses y tiempo disponible.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Itinerarios a medida</li>
+                            <li><i class="fas fa-check"></i> Optimización de tiempo</li>
+                            <li><i class="fas fa-check"></i> Recomendaciones locales</li>
+                            <li><i class="fas fa-check"></i> App móvil</li>
+                        </ul>
+                        <a href="#rutas" class="btn btn-primary">Crear Ruta</a>
+                        <a href="#" class="btn btn-outline">Ejemplos</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Información de Seguridad</h3>
+                        <p class="service-description">Mantente informado sobre las zonas seguras y recomendaciones actualizadas.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Alertas en tiempo real</li>
+                            <li><i class="fas fa-check"></i> Zonas recomendadas</li>
+                            <li><i class="fas fa-check"></i> Contactos de emergencia</li>
+                            <li><i class="fas fa-check"></i> Consejos locales</li>
+                        </ul>
+                        <a href="#alertas" class="btn btn-primary">Ver Alertas</a>
+                        <a href="#" class="btn btn-outline">Consejos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alerts Section -->
+    <section id="alertas" class="alerts-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Alertas y Seguridad</h2>
+                <p>Información actualizada para un viaje seguro</p>
+            </div>
+            
+            <div class="alert success">
+                <i class="fas fa-check-circle alert-icon"></i>
+                <div class="alert-content">
+                    <h4>Zona Centro - Estado Seguro</h4>
+                    <p>El centro de Medellín presenta condiciones normales. Ideal para turismo durante el día y la noche temprana.</p>
+                </div>
+            </div>
+
+            <div class="alert">
+                <i class="fas fa-exclamation-triangle alert-icon"></i>
+                <div class="alert-content">
+                    <h4>Comuna 13 - Precaución</h4>
+                    <p>Se recomienda visitar únicamente con tours oficiales. Evitar explorar por cuenta propia especialmente en horas nocturnas.</p>
+                </div>
+            </div>
+
+            <div class="alert danger">
+                <i class="fas fa-ban alert-icon"></i>
+                <div class="alert-content">
+                    <h4>Zonas Periféricas - No Recomendado</h4>
+                    <p>Algunas zonas periféricas no son recomendadas para turistas. Consulta con nuestros guías antes de planificar visitas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Places -->
+    <section id="lugares" class="places-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Lugares Destacados</h2>
+                <p>Los mejores destinos que Medellín tiene para ofrecer</p>
+            </div>
+            
+            <div class="places-grid">
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Plaza Botero</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.6 (1,890 reseñas)</span>
+                        </div>
+                        <p>Vista panorámica de la ciudad desde el pueblito paisa. Perfecto para fotos.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Jardín Botánico</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.7 (1,650 reseñas)</span>
+                        </div>
+                        <p>Oasis natural en el corazón de la ciudad con diversidad de flora tropical.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Metrocable</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.5 (2,300 reseñas)</span>
+                        </div>
+                        <p>Sistema de transporte único con vistas espectaculares de la ciudad.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Comuna 13</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.9 (1,420 reseñas)</span>
+                        </div>
+                        <p>Transformación urbana con increíbles murales y escaleras eléctricas.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">El Tesoro</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.3 (980 reseñas)</span>
+                        </div>
+                        <p>Centro comercial premium con las mejores marcas y restaurantes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Routes Section -->
+    <section id="rutas" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Rutas Recomendadas</h2>
+                <p>Itinerarios diseñados para aprovechar al máximo tu tiempo en Medellín</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Medellín en 1 Día</h3>
+                        <p class="service-description">Lo esencial de la ciudad en una jornada completa. Perfecto para visitantes con poco tiempo.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-map-marker-alt"></i> Plaza Botero</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Metrocable</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Pueblito Paisa</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Centro Comercial</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Ver Ruta</a>
+                        <a href="#" class="btn btn-outline">Personalizar</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-calendar-week"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Fin de Semana Cultural</h3>
+                        <p class="service-description">Sumérgete en la rica cultura paisa durante un fin de semana completo.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-map-marker-alt"></i> Museos y galerías</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Comuna 13</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Jardín Botánico</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Vida nocturna</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Ver Ruta</a>
+                        <a href="#" class="btn btn-outline">Personalizar</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Tour Gastronómico</h3>
+                        <p class="service-description">Descubre los sabores tradicionales y modernos de la cocina antioqueña.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-utensils"></i> Restaurantes tradicionales</li>
+                            <li><i class="fas fa-utensils"></i> Food trucks locales</li>
+                            <li><i class="fas fa-utensils"></i> Mercados populares</li>
+                            <li><i class="fas fa-utensils"></i> Cafeterías especiales</li>
+                        </ul>
+                        <a href="#restaurantes" class="btn btn-primary">Ver Ruta</a>
+                        <a href="#" class="btn btn-outline">Personalizar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurants Section -->
+    <section id="restaurantes" class="places-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Gastronomía Local</h2>
+                <p>Los mejores sabores de Medellín te esperan</p>
+            </div>
+            
+            <div class="places-grid">
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">El Rancherito</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.8 (1,250 reseñas)</span>
+                        </div>
+                        <p>Auténtica bandeja paisa en el corazón de Medellín. Tradición familiar desde 1950.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Café Pergamino</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.7 (890 reseñas)</span>
+                        </div>
+                        <p>El mejor café de especialidad con granos 100% colombianos. Ambiente acogedor.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Mondongo's</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.4 (670 reseñas)</span>
+                        </div>
+                        <p>Comida típica antioqueña con ambiente familiar. Especialistas en sancocho.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-pizza-slice"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Ocio</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.9 (1,580 reseñas)</span>
+                        </div>
+                        <p>Restaurante gourmet con fusión de cocina internacional y local. Ambiente elegante.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-cocktail"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Alambique</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.6 (920 reseñas)</span>
+                        </div>
+                        <p>Coctelería de autor con ingredientes locales. Vista panorámica de la ciudad.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-ice-cream"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Crepes & Waffles</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.3 (1,100 reseñas)</span>
+                        </div>
+                        <p>Cadena colombiana famosa por sus postres y helados artesanales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Acciones Rápidas</h2>
+                <p>Herramientas útiles para tu experiencia en Medellín</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card" style="cursor: pointer;" onclick="showProfile()">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div style="color: var(--primary); font-weight: 600;">Mi Perfil</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Gestionar cuenta</div>
+                </div>
+                <div class="stat-card" style="cursor: pointer;">
+                    <div class="stat-icon">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <div style="color: var(--primary); font-weight: 600;">Favoritos</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Lugares guardados</div>
+                </div>
+                <div class="stat-card" style="cursor: pointer;">
+                    <div class="stat-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div style="color: var(--primary); font-weight: 600;">Historial</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Viajes anteriores</div>
+                </div>
+                <div class="stat-card" style="cursor: pointer;">
+                    <div class="stat-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div style="color: var(--primary); font-weight: 600;">Soporte</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Ayuda 24/7</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Mobile Navigation
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Active navigation link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Close mobile menu
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Profile functionality
+        function showProfile() {
+            alert('Redirigiendo a tu perfil...\n\n• Información personal\n• Preferencias de viaje\n• Historial de reservas\n• Configuraciones de cuenta');
+        }
+
+        // Add hover effects to cards
+        document.querySelectorAll('.service-card, .place-card, .stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for animations
+        document.querySelectorAll('.service-card, .place-card, .alert').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial opacity for smooth loading
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+        });
+
+        // Toggle mobile nav spans animation
+        navToggle.addEventListener('click', () => {
+            const spans = navToggle.querySelectorAll('span');
+            navToggle.classList.toggle('active');
+            
+            if (navToggle.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Add click handlers for service buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.href === '#' || this.href.includes('#')) {
+                    e.preventDefault();
+                    const text = this.textContent.trim();
+                    
+                    let message = '';
+                    switch(text) {
+                        case 'Ver Tours':
+                            message = '🗺️ Tours Disponibles:\n\n• City Tour Básico - $50.000\n• Tour Comuna 13 - $35.000\n• Tour Gastronómico - $70.000\n• Tour Nocturno - $45.000';
+                            break;
+                        case 'Crear Ruta':
+                            message = '📍 Creador de Rutas:\n\nSelecciona tus intereses:\n• Historia y Cultura\n• Gastronomía\n• Naturaleza\n• Compras\n• Vida Nocturna';
+                            break;
+                        case 'Ver Alertas':
+                            message = '⚠️ Alertas Actuales:\n\n• Centro: SEGURO ✅\n• Poblado: SEGURO ✅\n• Comuna 13: PRECAUCIÓN ⚠️\n• Periferia: NO RECOMENDADO ❌';
+                            break;
+                        case 'Ver Ruta':
+                            message = '🎯 Ruta Seleccionada:\n\nItinerario detallado con:\n• Horarios optimizados\n• Transporte incluido\n• Guía local\n• Recomendaciones';
+                            break;
+                        default:
+                            message = `Funcionalidad "${text}" próximamente disponible`;
+                    }
+                    
+                    alert(message);
+                }
+            });
+        });
+    </script>
+</body>
+</html></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.8 (2,150 reseñas)</span>
+                        </div>
+                        <p>El corazón cultural de Medellín con las famosas esculturas de Fernando Botero.</p>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-image">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">Cerro Nutibara</h3>
+                        <div class="place-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star
